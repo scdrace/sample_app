@@ -1,6 +1,7 @@
 require 'test_helper'
 
-class StaticPagesControllerTest < ActionController::TestCase
+# class StaticPagesControllerTest < ActionController::TestCase
+class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get home" do
     #get :home
     get root_path
@@ -30,5 +31,4 @@ class StaticPagesControllerTest < ActionController::TestCase
     assert_response :success
     assert_select "title", "Contact | Ruby on Rails Tutorial Sample App"
   end
-
 end
