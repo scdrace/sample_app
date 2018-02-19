@@ -9,11 +9,13 @@ class SessionsController < ApplicationController
     # puts User.first.inspect
     # user = User.first.update(password: "foobar")
     # puts "PARAMS!!!: #{params[:sessions]}"
+    # puts "PARAMS: #{params}"
     email = params[:session][:email].downcase
     password = params[:session][:password].downcase
     user = User.find_by(email: email)
     if user && user.authenticate(password)
       log_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user
     else
       flash.now[:danger] = 'Invalid email/password combination'
